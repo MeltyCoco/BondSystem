@@ -1,4 +1,4 @@
 from .bondsystem import Bondsystem
 
-def setup(bot):
+async def setup(bot):
     bot.add_cog(Bondsystem(bot))
