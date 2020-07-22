@@ -32,6 +32,8 @@ class Bondsystem(Cog):
             wishlist=None,
         )
 
+        self.cardlist: dict = None
+
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
     async def bondset(self, ctx):
@@ -77,7 +79,7 @@ class Bondsystem(Cog):
     async def gacharoll(self, ctx: commands.Context, amount: int = 1):
         """pulls a card from the current card list"""
 
-        cardlist = json.loads("cards.json")
+        cardlist = json.load("cards.json")
         for x in range (0, amount - 1):
             tempcard = random.randint(0, len(cardlist) - 1)
             ctx.send("The card you got was, " + cardlist[tempcard] + " from the series " + cardlist[tempcard].series)
