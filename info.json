@@ -1,19 +1,18 @@
 {
-	"author": [
-		"MeltyCoco"
-	],
-	"description": "Marry your waifus and shit",
-    "install_msg": "Sup me",
-    "min_python_version": [3, 7, 0],
-	"min_bot_version": "3.3.6",
-    "permissions" : [
-		"add_reactions",
-		"manage_messages"
-	],
-	"short": "Waifu marry",
-	"tags": [
-		"marriage",
-		"lifechanger"
-	],
-	"type": "COG"
+  "author": [
+    "MeltyCoco"
+  ],
+  "install_msg": "Bitch ass you deaf",
+  "name": "gacha and more",
+  "short": "gacha",
+  "description": "roll and gamble or some wack",
+  "min_python_version": [
+    3,
+    6,
+    0
+  ],
+  "tags": [
+    "rpg",
+    "adventure"
+  ]
 }
