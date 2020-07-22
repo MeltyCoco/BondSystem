@@ -11,6 +11,7 @@ from redbot.core.utils.predicates import MessagePredicate
 
 from redbot.core.bot import Red
 
+Cog: Any = getattr(commands, "Cog", object)
 
 class Bondsystem(Cog):
     """Marry shit"""
