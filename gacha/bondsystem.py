@@ -75,7 +75,6 @@ class Bondsystem(Cog):
 #        if not card:
 #            await self.configmember(ctx.quthor).wishlist.set(None)
 
-        @Bondsystem.command()
         async def roll(self, ctx: commands.Context, amount: int = 1):
             """pulls a card from the current card list"""
 
