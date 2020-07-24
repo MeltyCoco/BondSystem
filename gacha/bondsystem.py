@@ -99,7 +99,7 @@ class Bondsystem(Cog):
         await self.bot.wait_until_ready()
         try:
             with open("cog_data_path(self)/default/cards.json") as f:
-                self.card_data = f.read()
+                self.card_data = json.load(f)
         except Exception as err:
             log.exception("There was an error starting up the cog", exc_info=err)
         await ctx.send("card list is processed")
