@@ -99,11 +99,11 @@ class Bondsystem(Cog):
         await self.bot.wait_until_ready()
         try:
             with open("cog_data_path(self)/default/cards.json") as f:
-                self.card_data = json.load(f)
+                self.card_data = f.read()
         except Exception as err:
             log.exception("There was an error starting up the cog", exc_info=err)
         await ctx.send("card list is processed")
-        
+
         for x in range(0, amount):
             await ctx.send("command run " + str(x))
             tempcard = random.randint(0, len(self.card_data))
