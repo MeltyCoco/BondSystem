@@ -82,7 +82,7 @@ class Bondsystem(Cog):
     async def gacharoll(self, ctx: commands.Context, amount: int = 1):
         """pulls a card from the current card list"""
 
-        cardlist = json.loads("cards.json")
+        cardlist = json.loads('cards.json')
         for x in range(0, amount - 1):
             tempcard = random.randint(0, len(cardlist) - 1)
             ctx.send("The card you got was, " + cardlist[tempcard] + " from the series " + cardlist[tempcard].series)
