@@ -98,6 +98,7 @@ class Bondsystem(Cog):
 
         await self.bot.wait_until_ready()
         try:
+            await ctx.send("Read the file")
             with open("cog_data_path(self)/data/default/cards.json") as f:
                 self.card_data = json.load(f)
             await ctx.send("Read the file")
