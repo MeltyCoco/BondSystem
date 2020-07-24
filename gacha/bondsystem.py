@@ -86,4 +86,4 @@ class Bondsystem(Cog):
         for x in range(0, amount - 1):
             tempcard = random.randint(0, 4)
             #ctx.send("The card you got was, " + cardlist[tempcard] + " from the series " + cardlist[tempcard].series)
-            ctx.send("You would have pulled a " + tempcard)
+            await ctx.send("You would have pulled a " + tempcard)
