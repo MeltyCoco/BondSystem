@@ -98,9 +98,10 @@ class Bondsystem(Cog):
 
         await self.bot.wait_until_ready()
         try:
-            await ctx.send("attempting to read the file")
-            with open("cog_data_path(self)/data/default/cards.json") as f:
-                await ctx.send("File path gotten")
+            await ctx.send("attempting to get to the file")
+            card_data_fp = cog_data_path(self) / "data" / "default" / "cards.json"
+            with open(card_data_fp) as f:
+                await ctx.send("attempting to read the file")
                 self.card_data = json.load(f)
             await ctx.send("Read the file")
         except Exception as err:
