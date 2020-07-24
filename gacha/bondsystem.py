@@ -10,17 +10,19 @@ from typing import Any, List
 from redbot.core import Config, checks, commands, bank
 from redbot.core.utils.chat_formatting import humanize_list
 from redbot.core.utils.predicates import MessagePredicate
+from redbot.core.data_manager import bundled_data_path, cog_data_path
+
 
 from redbot.core.bot import Red
 
 Cog: Any = getattr(commands, "Cog", object)
-
 
 class Bondsystem(Cog):
     """Marry shit"""
 
     __author__ = "MeltyCoco"
     __version__ = "0.0.1"
+
 
     def __init__(self, bot: Red):
         self.bot = bot
@@ -35,7 +37,13 @@ class Bondsystem(Cog):
             wishlist=None,
         )
 
-        self.cardlist: dict = None
+        self.card_data: dict = None
+
+    async def initialize(self):
+        await self.bot.wait_until_ready()
+        try:
+            with open("cog_data_path(self)/default/cards.json") as f:
+                self.card_data = json.load(f)
 
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
@@ -82,9 +90,6 @@ class Bondsystem(Cog):
     async def gacharoll(self, ctx: commands.Context, amount: int = 1):
         """pulls a card from the current card list"""
 
-        with open('cards.json', 'r') as data_file:
-            cards_data = data_file.read()
-        cardlist = json.loads(cards_data)
         for x in range(0, amount):
-            tempcard = random.randint(0, 4)
-            await ctx.send("The card you got was, " + cardlist[tempcard] + " from the series " + cardlist[tempcard].series)
+            tempcard = random.randint(0, len(self.card_data))
+            await ctx.send("The card you got was, " + self.card_data[tempcard] + " from the series " + self.card_data[tempcard].series)
