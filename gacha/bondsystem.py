@@ -1,9 +1,11 @@
 import discord
+from discord.ext.commands import CheckFailure
+from discord.ext.commands.errors import BadArgument
 import asyncio
 import random
 import json
 
-from typing import Any
+from typing import Any, List
 
 from redbot.core import Config, checks, commands, bank
 from redbot.core.utils.chat_formatting import humanize_list
@@ -12,6 +14,7 @@ from redbot.core.utils.predicates import MessagePredicate
 from redbot.core.bot import Red
 
 Cog: Any = getattr(commands, "Cog", object)
+
 
 class Bondsystem(Cog):
     """Marry shit"""
@@ -80,6 +83,6 @@ class Bondsystem(Cog):
         """pulls a card from the current card list"""
 
         cardlist = json.loads("cards.json")
-        for x in range (0, amount - 1):
+        for x in range(0, amount - 1):
             tempcard = random.randint(0, len(cardlist) - 1)
             ctx.send("The card you got was, " + cardlist[tempcard] + " from the series " + cardlist[tempcard].series)
