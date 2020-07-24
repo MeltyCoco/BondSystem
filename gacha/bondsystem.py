@@ -103,6 +103,7 @@ class Bondsystem(Cog):
             await ctx.send("Read the file")
         except Exception as err:
             log.exception("There was an error starting up the cog", exc_info=err)
+            await ctx.send("Failed to read file")
         await ctx.send("card list is processed")
 
         for x in range(0, amount):
