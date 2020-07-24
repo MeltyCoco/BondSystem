@@ -102,7 +102,7 @@ class Bondsystem(Cog):
             card_data_fp = cog_data_path(self) / "gacha" / "data" / "default" / "cards.json"
             await ctx.send("file path is: " + str(card_data_fp))
             await ctx.send("file path set")
-            with open(card_data_fp) as f:
+            with open(card_data_fp, "r") as f:
                 await ctx.send("attempting to read the file")
                 self.card_data = json.load(f)
             await ctx.send("Read the file")
