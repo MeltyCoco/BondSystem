@@ -4,6 +4,7 @@ from discord.ext.commands.errors import BadArgument
 import asyncio
 import random
 import json
+import logging
 
 from typing import Any, List
 
@@ -16,6 +17,8 @@ from redbot.core.data_manager import bundled_data_path, cog_data_path
 from redbot.core.bot import Red
 
 Cog: Any = getattr(commands, "Cog", object)
+
+log = logging.getLogger("red.cogs.adventure")
 
 class Bondsystem(Cog):
     """Marry shit"""
@@ -44,6 +47,8 @@ class Bondsystem(Cog):
         try:
             with open("cog_data_path(self)/default/cards.json") as f:
                 self.card_data = json.load(f)
+        except Exception as err:
+            log.exception("There was an error starting up the cog", exc_info=err)
 
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
@@ -90,6 +95,9 @@ class Bondsystem(Cog):
     async def gacharoll(self, ctx: commands.Context, amount: int = 1):
         """pulls a card from the current card list"""
 
+        await ctx.send("command got")
+
         for x in range(0, amount):
+            await ctx.send("command run " + str(x))
             tempcard = random.randint(0, len(self.card_data))
             await ctx.send("The card you got was, " + self.card_data[tempcard] + " from the series " + self.card_data[tempcard].series)
