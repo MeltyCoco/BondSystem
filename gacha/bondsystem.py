@@ -106,5 +106,6 @@ class Bondsystem(Cog):
 
         for x in range(0, amount):
             await ctx.send("command run " + str(x))
-            tempcard = random.randint(0, len(self.card_data))
-            await ctx.send("The card you got was, " + self.card_data[tempcard] + " from the series " + self.card_data[tempcard].series)
+            await ctx.send(self.card_data[0])
+#            tempcard = random.randint(0, len(self.card_data))
+#            await ctx.send("The card you got was, " + self.card_data[tempcard] + " from the series " + self.card_data[tempcard].series)
