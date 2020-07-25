@@ -35,20 +35,22 @@ class Bondsystem(Cog):
 
         self.config.register_member(
             # What cards you got
-            inventory=[],
+            inventory={},
             # What you want
-            wishlist=None,
+            wishlist={},
         )
 
-#        self.card_data: dict = None
+    def __str__(self):
+        return (
+            "Name {}\n"
+            "Inventory: {}\n"
+            "Wishlist: {}".format(self.user, self.inventory, self.wishlist)
+        )
 
-#    async def initialize(self):
-#        await self.bot.wait_until_ready()
-#        try:
-#            with open("cog_data_path(self)/default/cards.json") as f:
-#                self.card_data = json.load(f)
-#        except Exception as err:
-#            log.exception("There was an error starting up the cog", exc_info=err)
+    def __repr__(self):
+        return "{} - {} - {}".format(
+            self.user, self.inventory, self.wishlist,
+        )
 
     async def _send_message(channel, message):
         """Sends a message"""
@@ -65,6 +67,17 @@ class Bondsystem(Cog):
                 self.card_data = json.load(json_data)
         except Exception as err:
             log.exception("There was an error starting up the cog", exc_info=err)
+
+    async def _withdraw_points(user: User, amount):
+        #
+        # Substract currency from the user
+        #
+
+        if (bank.get_balance(User) - amount) < 0:
+            return False
+        else:
+            bank.withdraw_credits(amount)
+            return True
 
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
@@ -110,7 +123,6 @@ class Bondsystem(Cog):
     @commands.command()
     async def gacharoll(self, ctx: commands.Context, amount: int = 1):
         """pulls a card from the current card list"""
-        await ctx.send("command got")
         await self._load_card_list()
 
         card_options = self.card_data["cards"]
@@ -118,6 +130,8 @@ class Bondsystem(Cog):
         for x in range(0, amount):
             await ctx.send("command run " + str(x + 1))
             cardrolled = choice(card_options)
-            await ctx.send("You got a " + cardrolled["name"] + "!")
-#            tempcard = random.randint(0, len(self.card_data))
-#            await ctx.send("The card you got was, " + self.card_data[tempcard] + " from the series " + self.card_data[tempcard].series)
+            a em = discord.Embed(color=discord.Color.green())  # , description='\a\n')
+            em.set_thumbnail(url=cardrolled["image"])
+            em.set_author(cardrolled["name"])
+            em.add_field(name="series:",value=cardrolled["series"])
+#            await self.config.user(self.user).inventory.append
