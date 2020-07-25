@@ -27,18 +27,11 @@ class Bondsystem(Cog):
     __version__ = "0.0.1"
 
 
-    def __init__(self, bot: Red):
-        self.bot = bot
-        self.config = Config.get_conf(
-            self, identifier=3169503212009969, force_registration=True
-        )
-
-        self.config.register_member(
-            # What cards you got
-            inventory={},
-            # What you want
-            wishlist=None,
-        )
+    def __init__(self, user: discord.User, config: Config):
+        self.user = user
+        self.config = config
+        self.inventory = {}
+        self.wishlist = {}
 
     def __str__(self):
         return (
