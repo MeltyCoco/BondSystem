@@ -62,9 +62,9 @@ class Bondsystem(Cog):
     async def _grab_random_rarity(self):
         """grabs a random rarity"""
         #EVERYTIME YOU ADD A RARITY, BE SURE TO ADD IT HERE AND WEIGHT IT
-        rarityList = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
-        self.rarityGrabbed = choices(rarityList, weights= (40,50,8,2,1))
-        return self.rarityGrabbed
+        raritylist = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
+        raritygrabbed = str(choices(raritylist, weights= (40,50,8,2,1)))
+        return raritygrabbed
 
 
     @commands.group(autohelp=True)
