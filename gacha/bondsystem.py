@@ -68,17 +68,6 @@ class Bondsystem(Cog):
         except Exception as err:
             log.exception("There was an error starting up the cog", exc_info=err)
 
-    async def _withdraw_points(user: User, amount):
-        #
-        # Substract currency from the user
-        #
-
-        if (bank.get_balance(User) - amount) < 0:
-            return False
-        else:
-            bank.withdraw_credits(amount)
-            return True
-
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
     async def bondset(self, ctx):
