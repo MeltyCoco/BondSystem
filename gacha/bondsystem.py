@@ -113,7 +113,7 @@ class Bondsystem(Cog):
         await ctx.send("command got")
 
         for x in range(0, amount):
-            await ctx.send("command run " + str(x)+ 1)
+            await ctx.send("command run " + str(x + 1))
             cardrolled = choice(self.card_data)
             await ctx.send("You got a " + cardrolled["name"] + "!")
 #            tempcard = random.randint(0, len(self.card_data))
