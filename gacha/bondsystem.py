@@ -111,7 +111,7 @@ class Bondsystem(Cog):
     async def gacharoll(self, ctx: commands.Context, amount: int = 1):
         """pulls a card from the current card list"""
         await ctx.send("command got")
-
+        await self._load_card_list()
         for x in range(0, amount):
             await ctx.send("command run " + str(x + 1))
             cardrolled = choice(self.card_data)
