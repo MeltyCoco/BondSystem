@@ -114,5 +114,5 @@ class Bondsystem(Cog):
             em.set_thumbnail(url=cardrolled["image"])
             em.set_author(name=cardrolled["name"])
             em.add_field(name="series:",value=cardrolled["series"])
-            await ctx.send(embded=em)
+            await ctx.send(embed=em)
 #            await self.config.user(self.user).inventory.append
