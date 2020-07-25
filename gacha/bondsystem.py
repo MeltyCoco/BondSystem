@@ -55,13 +55,9 @@ class Bondsystem(Cog):
 
     async def _load_card_list(self):
         """reloads the card list"""
-        await self.bot.wait_until_ready()
-        try:
-            card_data_fp = bundled_data_path(self) / "default" / "cards.json"
-            with card_data_fp.open() as json_data:
-                self.card_data = json.load(json_data)
-        except Exception as err:
-            log.exception("There was an error starting up the cog", exc_info=err)
+        card_data_fp = bundled_data_path(self) / "default" / "cards.json"
+        with card_data_fp.open() as json_data:
+            self.card_data = json.load(json_data)
 
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
