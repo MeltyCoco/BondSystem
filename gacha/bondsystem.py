@@ -63,7 +63,7 @@ class Bondsystem(Cog):
         """grabs a random rarity"""
         #EVERYTIME YOU ADD A RARITY, BE SURE TO ADD IT HERE AND WEIGHT IT
         raritylist = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
-        raritygrabbed = str(choices(raritylist, weights= (40,50,8,2,1)))
+        raritygrabbed = choices(raritylist, weights=[40, 50, 8, 2, 1])
         return raritygrabbed
 
 
