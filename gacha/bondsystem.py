@@ -112,7 +112,7 @@ class Bondsystem(Cog):
             cardrolled = choice(card_options)
             em = discord.Embed(color=discord.Color.green())  # , description='\a\n')
             em.set_thumbnail(url=cardrolled["image"])
-            em.set_author(cardrolled["name"])
+            em.set_author(name=cardrolled["name"])
             em.add_field(name="series:",value=cardrolled["series"])
             await ctx.send(embded=em)
 #            await self.config.user(self.user).inventory.append
