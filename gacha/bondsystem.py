@@ -64,7 +64,8 @@ class Bondsystem(Cog):
         #EVERYTIME YOU ADD A RARITY, BE SURE TO ADD IT HERE AND WEIGHT IT
         raritylist = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
         raritygrabbed = choices(raritylist, weights=[40, 50, 8, 2, 1])
-        return raritygrabbed
+        raritystring = raritygrabbed[0]
+        return raritystring
 
 
     @commands.group(autohelp=True)
