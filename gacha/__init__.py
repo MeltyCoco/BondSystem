@@ -3,6 +3,6 @@ from redbot.core import data_manager
 
 
 async def setup(bot):
-    tycoon = Bondsystem(bot)
-    data_manager.bundled_data_path(tycoon)
-    bot.add_cog(Bondsystem)
+    bond = Bondsystem(bot)
+    data_manager.bundled_data_path(bond)
+    bot.add_cog(bond)
