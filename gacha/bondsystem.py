@@ -27,9 +27,11 @@ class Bondsystem(Cog):
     __version__ = "0.0.1"
 
 
-    def __init__(self, user: discord.User, config: Config):
+    def __init__(self, user: discord.User):
         self.user = user
-        self.config = config
+        self.config = Config.get_conf(
+            self, identifier=3169503212009969, force_registration=True
+        )
         self.inventory = {}
         self.wishlist = {}
 
