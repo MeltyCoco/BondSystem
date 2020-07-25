@@ -112,9 +112,12 @@ class Bondsystem(Cog):
         """pulls a card from the current card list"""
         await ctx.send("command got")
         await self._load_card_list()
+
+        card_options = self.card_data["cards"]
+
         for x in range(0, amount):
             await ctx.send("command run " + str(x + 1))
-            cardrolled = choice(self.card_data)
+            cardrolled = choice(card_options)
             await ctx.send("You got a " + cardrolled["name"] + "!")
 #            tempcard = random.randint(0, len(self.card_data))
 #            await ctx.send("The card you got was, " + self.card_data[tempcard] + " from the series " + self.card_data[tempcard].series)
