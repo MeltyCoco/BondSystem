@@ -40,7 +40,7 @@ class Bondsystem(Cog):
             wishlist=None,
         )
 
-        self.card_data: dict = None
+#        self.card_data: dict = None
 
 #    async def initialize(self):
 #        await self.bot.wait_until_ready()
