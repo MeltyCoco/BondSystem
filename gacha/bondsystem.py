@@ -110,9 +110,9 @@ class Bondsystem(Cog):
         for x in range(0, amount):
             await ctx.send("command run " + str(x + 1))
             cardrolled = choice(card_options)
-            em = discord.Embed(color=discord.Color.green())  # , description='\a\n')
-            em.set_thumbnail(url=cardrolled["image"])
-            em.title(name=cardrolled["name"])
-            em.description(name=cardrolled["series"])
-            await ctx.send(embed=em)
-#            await self.config.user(self.user).inventory.append
+            embed=discord.Embed(title=cardrolled["name"], description=cardrolled["series"])
+            embed.set_thumbnail(url=cardrolled["image"])
+            embed.add_field(name="Birthday", value=cardrolled["birthday"], inline=False)
+            embed.add_field(name="Quote", value=cardroll["quote"], inline=False)
+            embed.set_footer(text="I know you want another gacha hit")
+            await ctx.send(embed=embed)
