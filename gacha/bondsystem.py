@@ -130,8 +130,9 @@ class Bondsystem(Cog):
         for x in range(0, amount):
             await ctx.send("command run " + str(x + 1))
             cardrolled = choice(card_options)
-            a em = discord.Embed(color=discord.Color.green())  # , description='\a\n')
+            em = discord.Embed(color=discord.Color.green())  # , description='\a\n')
             em.set_thumbnail(url=cardrolled["image"])
             em.set_author(cardrolled["name"])
             em.add_field(name="series:",value=cardrolled["series"])
+            await ctx.send(embded=em)
 #            await self.config.user(self.user).inventory.append
