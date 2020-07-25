@@ -2,9 +2,9 @@ import discord
 from discord.ext.commands import CheckFailure
 from discord.ext.commands.errors import BadArgument
 import asyncio
-import random
 import json
 import logging
+from random import choice
 
 from typing import Any, List
 
@@ -49,6 +49,22 @@ class Bondsystem(Cog):
 #                self.card_data = json.load(f)
 #        except Exception as err:
 #            log.exception("There was an error starting up the cog", exc_info=err)
+
+    async def _send_message(channel, message):
+        """Sends a message"""
+
+        em = discord.Embed(description=message, color=discord.Color.green())
+        await channel.send(embed=em)
+
+    async def _load_card_list(self):
+        """reloads the card list"""
+        await self.bot.wait_until_ready()
+        try:
+            card_data_fp = bundled_data_path(self) / "default" / "cards.json"
+            with open(card_data_fp, "r") as f:
+                self.card_data = json.load(f)
+        except Exception as err:
+            log.exception("There was an error starting up the cog", exc_info=err)
 
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
@@ -96,23 +112,8 @@ class Bondsystem(Cog):
         """pulls a card from the current card list"""
         await ctx.send("command got")
 
-        await self.bot.wait_until_ready()
-        try:
-            await ctx.send("attempting to get to the file")
-            card_data_fp = bundled_data_path(self) / "default" / "cards.json"
-            await ctx.send("file path is: " + str(card_data_fp))
-            await ctx.send("file path set")
-            with open(card_data_fp, "r") as f:
-                await ctx.send("attempting to read the file")
-                self.card_data = json.load(f)
-            await ctx.send("Read the file")
-        except Exception as err:
-            log.exception("There was an error starting up the cog", exc_info=err)
-            await ctx.send("Failed to read file")
-        await ctx.send("card list is processed")
-
         for x in range(0, amount):
-            await ctx.send("command run " + str(x))
+            await ctx.send("command run " + str(x)+ 1)
             await ctx.send(self.card_data[1])
 #            tempcard = random.randint(0, len(self.card_data))
 #            await ctx.send("The card you got was, " + self.card_data[tempcard] + " from the series " + self.card_data[tempcard].series)
