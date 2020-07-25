@@ -118,6 +118,7 @@ class Bondsystem(Cog):
             # grabs a rarity type, more rare = harder to get.
             # Every rarity must be weighted by hand tho ;-;
             rarity = self._grab_random_rarity()
+            await ctx.send("you got a rarity: " + str(rarity))
             # grabs a card of that rarity
             card_options = self.card_data[rarity]
 
