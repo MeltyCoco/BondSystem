@@ -35,9 +35,21 @@ class Bondsystem(Cog):
 
         self.config.register_member(
             # What cards you got
-            inventory={},
+            inventory=[],
             # What you want
             wishlist={},
+        )
+
+    def __str__(self):
+        return (
+            "Name {}\n"
+            "Inventory: {}\n"
+            "Wishlist: {}".format(self.user, self.inventory, self.wishlist)
+        )
+
+    def __repr__(self):
+        return "{} - {} - {}".format(
+            self.user, self.inventory, self.wishlist,
         )
 
     async def _send_message(channel, message):
