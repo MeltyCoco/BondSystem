@@ -61,8 +61,8 @@ class Bondsystem(Cog):
         await self.bot.wait_until_ready()
         try:
             card_data_fp = bundled_data_path(self) / "default" / "cards.json"
-            with open(card_data_fp, "r") as f:
-                self.card_data = json.load(f)
+            with card_data_fp.open() as json_data:
+                self.card_data = json.load(json_data)
         except Exception as err:
             log.exception("There was an error starting up the cog", exc_info=err)
 
