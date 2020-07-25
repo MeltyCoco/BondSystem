@@ -35,9 +35,9 @@ class Bondsystem(Cog):
 
         self.config.register_member(
             # What cards you got
-            inventory=[],
+            inventory={},
             # What you want
-            wishlist={},
+            wishlist=None,
         )
 
     def __str__(self):
