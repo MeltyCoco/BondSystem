@@ -4,7 +4,7 @@ from discord.ext.commands.errors import BadArgument
 import asyncio
 import json
 import logging
-from random import choice
+from random import choice, choices
 
 from typing import Any, List
 
@@ -59,6 +59,14 @@ class Bondsystem(Cog):
         with card_data_fp.open() as json_data:
             self.card_data = json.load(json_data)
 
+    async def _grab_random_rarity(self):
+        """grabs a random rarity"""
+        #EVERYTIME YOU ADD A RARITY, BE SURE TO ADD IT HERE AND WEIGHT IT
+        rarityList = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
+        self.rarityGrabbed = choices(rarityList, weights= (40,50,8,2,1))
+        return self.rarityGrabbed
+
+
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
     async def bondset(self, ctx):
@@ -105,13 +113,18 @@ class Bondsystem(Cog):
         """pulls a card from the current card list"""
         await self._load_card_list()
 
-        card_options = self.card_data["cards"]
-
         for x in range(0, amount):
             await ctx.send("command run " + str(x + 1))
+            # grabs a rarity type, more rare = harder to get.
+            # Every rarity must be weighted by hand tho ;-;
+            rarity = self._grab_random_rarity()
+            # grabs a card of that rarity
+            card_options = self.card_data[rarity]
+
             cardrolled = choice(card_options)
             embed=discord.Embed(title=cardrolled["name"], description=cardrolled["series"])
             embed.set_thumbnail(url=cardrolled["image"])
+            embed.add_field(name="Rarity", value=cardrolled["rarity"], inline=False)
             embed.add_field(name="Birthday", value=cardrolled["birthday"], inline=False)
             embed.add_field(name="Quote", value=cardrolled["quote"], inline=False)
             embed.set_footer(text="I know you want another gacha hit")
