@@ -129,7 +129,7 @@ class Bondsystem(Cog):
             cardrolled = choice(card_options)
             embed=discord.Embed(title=cardrolled["name"], description=cardrolled["series"])
             embed.set_thumbnail(url=cardrolled["image"])
-            embed.add_field(name="Rarity", value=cardrolled["rarity"], inline=False)
+            embed.add_field(name="Rarity", value=cardrolled[raritystring], inline=False)
             embed.add_field(name="Birthday", value=cardrolled["birthday"], inline=False)
             embed.add_field(name="Quote", value=cardrolled["quote"], inline=False)
             embed.set_footer(text="I know you want another gacha hit")
