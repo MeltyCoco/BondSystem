@@ -8,6 +8,7 @@ from random import choice, choices
 
 from typing import Any, List
 
+from redbot.core.utils.menus import menu, commands, DEFAULT_CONTROLS
 from redbot.core import Config, checks, commands, bank
 from redbot.core.utils.chat_formatting import humanize_list
 from redbot.core.utils.predicates import MessagePredicate
@@ -118,7 +119,7 @@ class Bondsystem(Cog):
         # Every rarity must be weighted by hand tho ;-;
         # rarity = self._grab_random_rarity()
         raritylist = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
-        raritygrabbed = choices(raritylist, weights=[40, 50, 8, 2, 1], k=amount)
+        raritygrabbed = choices(raritylist, weights=[40, 50, 7, 2, 1], k=amount)
 
         for x in range(0, amount):
             await ctx.send("command run " + str(x + 1))
@@ -127,6 +128,8 @@ class Bondsystem(Cog):
             # grabs a card of that rarity
             card_options = self.card_data[raritystring]
 
+            allcard = []
+
             cardrolled = choice(card_options)
             embed=discord.Embed(title=cardrolled["name"], description=cardrolled["series"])
             embed.set_thumbnail(url=cardrolled["image"])
@@ -134,4 +137,7 @@ class Bondsystem(Cog):
             embed.add_field(name="Birthday", value=cardrolled["birthday"], inline=False)
             embed.add_field(name="Quote", value=cardrolled["quote"], inline=False)
             embed.set_footer(text="I know you want another gacha hit")
-            await ctx.send(embed=embed)
+
+            allcard.append(embed)
+
+        await menu(ctx, pages=allcard, controls=DEFAULT_CONTROLS, message=None, page=i, timeout=15)
