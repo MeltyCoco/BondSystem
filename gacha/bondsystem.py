@@ -122,11 +122,11 @@ class Bondsystem(Cog):
 
         for x in range(0, amount):
             await ctx.send("command run " + str(x + 1))
-
+            raritystring = raritygrabbed[x]
             await ctx.send("you got a rarity: " + str(raritystring))
             # grabs a card of that rarity
             card_options = self.card_data[raritystring]
-            raritystring = raritygrabbed[x]
+
             cardrolled = choice(card_options)
             embed=discord.Embed(title=cardrolled["name"], description=cardrolled["series"])
             embed.set_thumbnail(url=cardrolled["image"])
