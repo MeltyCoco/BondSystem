@@ -114,18 +114,19 @@ class Bondsystem(Cog):
         """pulls a card from the current card list"""
         await self._load_card_list()
 
+        # grabs a rarity type, more rare = harder to get.
+        # Every rarity must be weighted by hand tho ;-;
+        # rarity = self._grab_random_rarity()
+        raritylist = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
+        raritygrabbed = choices(raritylist, weights=[40, 50, 8, 2, 1], k=amount)
+
         for x in range(0, amount):
             await ctx.send("command run " + str(x + 1))
-            # grabs a rarity type, more rare = harder to get.
-            # Every rarity must be weighted by hand tho ;-;
-            #rarity = self._grab_random_rarity()
-            raritylist = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
-            raritygrabbed = choices(raritylist, weights=[40, 50, 8, 2, 1])
-            raritystring = raritygrabbed[0]
+
             await ctx.send("you got a rarity: " + str(raritystring))
             # grabs a card of that rarity
             card_options = self.card_data[raritystring]
-
+            raritystring = raritygrabbed[x]
             cardrolled = choice(card_options)
             embed=discord.Embed(title=cardrolled["name"], description=cardrolled["series"])
             embed.set_thumbnail(url=cardrolled["image"])
