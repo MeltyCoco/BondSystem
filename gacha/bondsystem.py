@@ -140,4 +140,4 @@ class Bondsystem(Cog):
 
             allcard.append(embed)
 
-        await menu(ctx, pages=allcard, controls=DEFAULT_CONTROLS, message=None, page=i, timeout=15)
+        await menu(ctx, pages=allcard, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=15)
