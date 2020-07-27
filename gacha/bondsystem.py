@@ -27,13 +27,15 @@ class Bondsystem(Cog):
     __author__ = "MeltyCoco"
     __version__ = "0.0.1"
 
-    def __init__(self, user: discord.User):
-        self.user = user
+    def __init__(self, bot: Red):
+        self.bot = bot
         self.config = Config.get_conf(
             self, identifier=3169503212009969, force_registration=True
         )
-        self.inventory = {}
-        self.wishlist = {}
+        self.config.register_member(
+            inventory={},
+            wishlist={}
+        )
 
         self.config.register_guild(
             toggle=True,
