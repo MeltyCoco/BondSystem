@@ -123,6 +123,7 @@ class Bondsystem(Cog):
         titlepage.add_field(name="Total cards", value=str(amount), inline=False)
         titlepage.add_field(name="Total cost", value=str(totalcost), inline=False)
         titlepage.set_footer(text="Use the arrows to navigate")
+        allcard.append(titlepage)
 
         await ctx.send("You've rolled " + str(amount) + " of times")
         for x in range(0, amount):
@@ -137,6 +138,7 @@ class Bondsystem(Cog):
             embed.add_field(name="Rarity", value=raritystring, inline=False)
             embed.add_field(name="Birthday", value=cardrolled["birthday"], inline=False)
             embed.add_field(name="Quote", value=cardrolled["quote"], inline=False)
+            embed.add_field(name="page", value=str(x) + " out of" + str(amount), inline=False),
             embed.set_footer(text="I know you want another gacha hit")
 
             # adds the card to the pages
