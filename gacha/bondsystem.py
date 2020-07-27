@@ -14,19 +14,18 @@ from redbot.core.utils.chat_formatting import humanize_list
 from redbot.core.utils.predicates import MessagePredicate
 from redbot.core.data_manager import bundled_data_path, cog_data_path
 
-
 from redbot.core.bot import Red
 
 Cog: Any = getattr(commands, "Cog", object)
 
 log = logging.getLogger("red.cogs.adventure")
 
+
 class Bondsystem(Cog):
     """Marry shit"""
 
     __author__ = "MeltyCoco"
     __version__ = "0.0.1"
-
 
     def __init__(self, user: discord.User):
         self.user = user
@@ -35,6 +34,11 @@ class Bondsystem(Cog):
         )
         self.inventory = {}
         self.wishlist = {}
+
+        self.config.register_guild(
+            toggle=True,
+            rollprice=100000
+        )
 
     def __str__(self):
         return (
@@ -62,12 +66,11 @@ class Bondsystem(Cog):
 
     async def _grab_random_rarity(self):
         """grabs a random rarity"""
-        #EVERYTIME YOU ADD A RARITY, BE SURE TO ADD IT HERE AND WEIGHT IT
+        # EVERYTIME YOU ADD A RARITY, BE SURE TO ADD IT HERE AND WEIGHT IT
         raritylist = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
         raritygrabbed = choices(raritylist, weights=[40, 50, 8, 2, 1])
         raritystring = raritygrabbed[0]
         return raritystring
-
 
     @commands.group(autohelp=True)
     @checks.admin_or_permissions(manage_guild=True)
@@ -115,29 +118,32 @@ class Bondsystem(Cog):
         """pulls a card from the current card list"""
         await self._load_card_list()
 
-        # grabs a rarity type, more rare = harder to get.
-        # Every rarity must be weighted by hand tho ;-;
-        # rarity = self._grab_random_rarity()
+        # every ten rolls, give grant 1 extra roll!
+        if (int(amount / 10) >= 1):
+            amount += int(amount / 10)
+
+        # Creates a rarity list, and then give it weights so that more common are more common
         raritylist = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
         raritygrabbed = choices(raritylist, weights=[40, 50, 7, 2, 1], k=amount)
 
         for x in range(0, amount):
-            await ctx.send("command run " + str(x + 1))
             raritystring = raritygrabbed[x]
-            await ctx.send("you got a rarity: " + str(raritystring))
-            # grabs a card of that rarity
+            # grabs a rarity from the rarity list above
             card_options = self.card_data[raritystring]
 
+            # Start creating pages for the embed command
             allcard = []
 
+            # Grabs a random card of the rarity grabbed and then creates the embed card for that card
             cardrolled = choice(card_options)
-            embed=discord.Embed(title=cardrolled["name"], description=cardrolled["series"])
+            embed = discord.Embed(title=cardrolled["name"], description=cardrolled["series"])
             embed.set_thumbnail(url=cardrolled["image"])
             embed.add_field(name="Rarity", value=raritystring, inline=False)
             embed.add_field(name="Birthday", value=cardrolled["birthday"], inline=False)
             embed.add_field(name="Quote", value=cardrolled["quote"], inline=False)
             embed.set_footer(text="I know you want another gacha hit")
 
+            # adds the card to the pages
             allcard.append(embed)
-
+        # Print out the pages as a menu (pages doesn't work for some reason)
         await menu(ctx, pages=allcard, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=60)
