@@ -32,25 +32,15 @@ class Bondsystem(Cog):
         self.config = Config.get_conf(
             self, identifier=3169503212009969, force_registration=True
         )
+
         self.config.register_member(
-            inventory={}
+            inventory={},
+            wishlies={}
         )
 
         self.config.register_guild(
             toggle=True,
             rollprice=100000
-        )
-
-    def __str__(self):
-        return (
-            "Name {}\n"
-            "Inventory: {}\n"
-            "Wishlist: {}".format(self.user, self.inventory, self.wishlist)
-        )
-
-    def __repr__(self):
-        return "{} - {} - {}".format(
-            self.user, self.inventory, self.wishlist,
         )
 
     async def _send_message(channel, message):
