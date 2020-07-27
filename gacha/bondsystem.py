@@ -126,6 +126,7 @@ class Bondsystem(Cog):
         raritylist = ["normal", "rare", "super rare", "super super rare", "ultra rare"]
         raritygrabbed = choices(raritylist, weights=[40, 50, 7, 2, 1], k=amount)
 
+        await ctx.send("You've rolled " + str(amount) + " of times")
         for x in range(0, amount):
             raritystring = raritygrabbed[x]
             # grabs a rarity from the rarity list above
@@ -146,4 +147,4 @@ class Bondsystem(Cog):
             # adds the card to the pages
             allcard.append(embed)
         # Print out the pages as a menu (pages doesn't work for some reason)
-        await menu(ctx, pages=allcard, controls=DEFAULT_CONTROLS, message=None, page=0, timeout=60)
+        await menu(ctx, pages=allcard, controls=DEFAULT_CONTROLS, message=None, page=1, timeout=60)
