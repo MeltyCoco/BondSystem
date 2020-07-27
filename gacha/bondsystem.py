@@ -30,7 +30,7 @@ class Bondsystem(Cog):
     def __init__(self, bot: Red):
         self.bot = bot
         self.config = Config.get_conf(
-            self, identifier=3169503212009969, force_registration=True
+            self, identifier=31695032120066669, force_registration=True
         )
 
         self.config.register_member(
