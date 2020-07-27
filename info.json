@@ -8,7 +8,7 @@
   "description": "roll and gamble or some wack",
   "min_python_version": [
     3,
-    6,
+    8,
     0
   ],
   "tags": [
