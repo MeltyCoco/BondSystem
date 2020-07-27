@@ -33,7 +33,7 @@ class Bondsystem(Cog):
             self, identifier=31695032120066669, force_registration=True
         )
 
-        self.config.register_member(
+        self.config.register_user(
             inventory={},
             wishlies={}
         )
@@ -108,6 +108,7 @@ class Bondsystem(Cog):
     async def gacharoll(self, ctx: commands.Context, amount: int = 1):
         """pulls a card from the current card list"""
         await self._load_card_list()
+        author = ctx.author
 
         # every ten rolls, give grant 1 extra roll!
         if (int(amount / 10) >= 1):
@@ -119,7 +120,7 @@ class Bondsystem(Cog):
 
         # Start creating pages for the embed command
         allcard = []
-        titlepage = discord.Embed(title=self.user, description="Rolls")
+        titlepage = discord.Embed(title=f"{author.mention}', description="Rolls")
         titlepage.set_thumbnail(url="https://i.imgur.com/JDTZ7XO.jpg?1")
         titlepage.add_field(name="Total cards", value=str(amount), inline=False)
         titlepage.add_field(name="Total cost", value=str(self.config.guild(ctx.guild).rollprice()*amount), inline=False)
