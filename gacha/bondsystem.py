@@ -131,7 +131,7 @@ class Bondsystem(Cog):
         titlepage = discord.Embed(title=self.user, description="Rolls")
         titlepage.set_thumbnail(url="https://i.imgur.com/JDTZ7XO.jpg?1")
         titlepage.add_field(name="Total cards", value=str(amount), inline=False)
-        titlepage.add_field(name="Total cost", value=str(self.config.guild(ctx.guild).rollprice*amount), inline=False)
+        titlepage.add_field(name="Total cost", value=str(self.config.guild(ctx.guild).rollprice()*amount), inline=False)
         titlepage.set_footer(text="Use the arrows to navigate")
 
         await ctx.send("You've rolled " + str(amount) + " of times")
