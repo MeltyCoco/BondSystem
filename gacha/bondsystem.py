@@ -33,8 +33,7 @@ class Bondsystem(Cog):
             self, identifier=3169503212009969, force_registration=True
         )
         self.config.register_member(
-            inventory={},
-            wishlist={}
+            inventory={}
         )
 
         self.config.register_guild(
